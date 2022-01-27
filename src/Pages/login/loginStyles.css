@@ -1,0 +1,49 @@
+.bg {
+  background-image: url('../../images/logINBG.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 0;
+}
+
+.inp ~ .inp-border {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #3399ff;
+  transition: 0.4s;
+  outline: 0;
+}
+
+.inp:focus ~ .inp-border {
+  width: 100%;
+  transition: 0.5s;
+  left: 0;
+}
+.inp {
+  border: 0;
+  padding: 7px 0;
+  border-bottom: 1px solid #ccc;
+}
+input[type='text'],
+input[type='password'] {
+  font: 15px/24px 'Lato', Arial, sans-serif;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  outline: 0;
+  letter-spacing: 1px;
+}
+
+.btn {
+  transition: background-color 0.5s ease;
+}
+.btn:disabled {
+  border-color: #17a3b875;
+  background-color: #17a3b830;
+}
+.btn {
+  border-color: #17a3b8;
+  background-color: #17a3b875;
+}
