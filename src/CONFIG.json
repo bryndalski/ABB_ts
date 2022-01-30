@@ -1,3 +1,4 @@
 {
-  "loginAddress": "https://abbdb.herokuapp.com/login"
+  "loginAddress": "https://abbdb.herokuapp.com/login",
+  "allSheetsNames": "https://abbdb.herokuapp.com/sheets"
 }
