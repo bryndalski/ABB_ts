@@ -1,9 +1,8 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { UserContext } from "./context/UserContext";
 import Login from "./Pages/login/Login";
 import Home from "./Pages/home/Home";
-
 const UserContextValue = {
   user: "",
   isLogged: false,

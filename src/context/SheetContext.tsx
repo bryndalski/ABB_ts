@@ -1,5 +1,8 @@
 import { createContext } from "react";
 
-const SheetContext = createContext(null);
+const SheetContext = createContext({
+  sheet: "",
+  setSheet: (sheetName: string) => {},
+});
 
 export default SheetContext;
