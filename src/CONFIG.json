@@ -1,4 +1,5 @@
 {
   "loginAddress": "https://abbdb.herokuapp.com/login",
-  "allSheetsNames": "https://abbdb.herokuapp.com/sheets"
+  "allSheetsNames": "https://abbdb.herokuapp.com/sheets",
+  "sheetsData": "https://abbdb.herokuapp.com/fetchColumn"
 }

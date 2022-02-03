@@ -10,8 +10,12 @@ export default function AsyncSwitch() {
   const [isLoadingOrError, SetIsLoadingOrError] = useState(true);
   //context
   const { setSheet } = useContext(SheetContext);
-  //fetching switch data
-  useEffect(() => {
+
+  //fetching data
+  let fetchingError = 10;
+  const fetchData = () => {
+    console.log("nawala");
+
     axios({
       method: "get",
       url: CONFIG.allSheetsNames,
@@ -25,7 +29,18 @@ export default function AsyncSwitch() {
         SetIsLoadingOrError((prev) => !prev);
         setSheet(res.data[0].label);
       })
-      .catch((e) => console.error(e));
+      .catch((e) => {
+        console.warn(e);
+        if (fetchingError > 0) {
+          // setTimeout(fetchData, 5000);
+          fetchingError--;
+        }
+      });
+  };
+
+  //fetching switch data
+  useEffect(() => {
+    fetchData();
   }, []);
   //Redner switch options
   const renderOptions = useCallback(

@@ -1,10 +1,14 @@
 import axios from 'axios'
 
-const getData = (url: string): Promise<Object> =>
+const getData = (url: string, sheet: string): Promise<Array<Object>> =>
   new Promise((suc, err) => {
+    console.log('XDDD')
+
     axios({
-      method: 'get',
+      method: 'POST',
       url,
+      data: { sheet },
+
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
@@ -14,4 +18,5 @@ const getData = (url: string): Promise<Object> =>
       })
       .catch((e) => err(e))
   })
+
 export default getData

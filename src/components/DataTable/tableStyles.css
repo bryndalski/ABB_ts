@@ -1,0 +1,10 @@
+tbody tr:nth-child(2n + 1) {
+  background-color: red;
+}
+
+tbody tr,
+tbody td {
+  text-overflow: ellipsis;
+  height: 30px !important;
+  /* line-height: 30px; */
+}
