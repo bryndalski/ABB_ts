@@ -6,9 +6,12 @@ import getData from "./GetSheetContent";
 import CONFIG from "../../CONFIG.json";
 //style
 import "./tableStyles.css";
+//components
+import TableRow from "../tableRow/TableRow";
 
 //!!! TEST
 import TEST_DATA from "./TEST.json";
+import TableHeader from "../tableHeader/TableHeader";
 
 export default function DataTable() {
   //using context
@@ -20,6 +23,14 @@ export default function DataTable() {
   const controllAsync = async () => {
     setIsLoading(true);
     setSheetData(await getData(CONFIG.sheetsData, sheet));
+    // if (Object.keys(sheetData[0])[0] === "id")
+    //   setSheetData((v) =>
+    //     v.map((e) => {
+    //       delete e.id;
+
+    //       return e;
+    //     })
+    //   );
     setIsLoading((prev) => !prev);
   };
 
@@ -38,25 +49,13 @@ export default function DataTable() {
     );
   else
     return (
-      <div className="overflow-scroll">
-        <table className="w-full bg-red-50 ">
-          <thead>
-            <tr>
-              {Object.keys(sheetData[0]).map((e, c) => (
-                <th key={c}>{e}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="">
-            {sheetData.map((v) => (
-              <tr className="bg-slate-300 max-h-7 ">
-                {Object.values(v).map((e) => (
-                  <td className="align-baseline">{e as string}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="w-full overflow-auto  tableContainer">
+        <div className="table w-full tableColor h-full  bg-slate-500">
+          <TableHeader row={Object.keys(sheetData[0])} specialClasses="" />
+          {sheetData.map((v, c) => (
+            <TableRow divNumber={c} row={v} key={c} specialClasses="" />
+          ))}
+        </div>
       </div>
     );
 }

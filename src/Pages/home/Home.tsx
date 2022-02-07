@@ -10,7 +10,7 @@ export default function Home() {
   const [sheet, setSheet] = useState("");
 
   return (
-    <div>
+    <div className="w-screen h-screen overflow-hidden">
       <SheetContext.Provider value={{ sheet, setSheet }}>
         <Header></Header>
         <DataTable></DataTable>

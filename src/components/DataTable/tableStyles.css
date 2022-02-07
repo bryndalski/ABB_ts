@@ -1,10 +1,19 @@
-tbody tr:nth-child(2n + 1) {
-  background-color: red;
+.tableColor div:nth-child(2n + 1) {
+  background-color: rgb(192, 209, 255);
+  word-break: keep-all;
 }
 
-tbody tr,
-tbody td {
-  text-overflow: ellipsis;
-  height: 30px !important;
-  /* line-height: 30px; */
+.tableContainer {
+  height: 100%;
+  /* height: calc(100vh - 100px) !important; */
 }
+.tableColor div,
+.tableColor div input {
+  height: 100px;
+  max-height: 100px;
+}
+
+/* .tableColor div p {
+  text-align: center;
+  line-height: 50px;
+} */
