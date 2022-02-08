@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState, useDebugValue } from "react";
-import SheetContext from "../../context/SheetContext";
 //functions
 import getData from "./GetSheetContent";
 //config
@@ -8,6 +7,9 @@ import CONFIG from "../../CONFIG.json";
 import "./tableStyles.css";
 //components
 import TableRow from "../tableRow/TableRow";
+//context
+import SheetContext from "../../context/SheetContext";
+import TableContext from "../../context/TableContext";
 
 //!!! TEST
 import TEST_DATA from "./TEST.json";
@@ -16,21 +18,26 @@ import TableHeader from "../tableHeader/TableHeader";
 export default function DataTable() {
   //using context
   const { sheet } = useContext(SheetContext);
+  const { setCellValue } = useContext(TableContext);
   //states
-  const [sheetData, setSheetData] = useState(new Array());
-  const [isLoading, setIsLoading] = useState(true);
+  const [sheetData, setSheetData] = useState<Array<object>>(new Array()); // all the sheets
+  const [isLoading, setIsLoading] = useState<boolean>(true); // is waiting for sheetData
+  const [cellSizeValues, setCellSize] = useState<Array<number>>([]); // table cell sizes → for resize
+  //context helpers
+  const cellResizer = (value: number, columnNumber: number): void => {
+    let cellSizes: Array<number> = [...cellSizeValues];
+    cellSizes[columnNumber] = value;
+    setCellSize([...cellSizes]);
+  };
 
   const controllAsync = async () => {
     setIsLoading(true);
-    setSheetData(await getData(CONFIG.sheetsData, sheet));
-    // if (Object.keys(sheetData[0])[0] === "id")
-    //   setSheetData((v) =>
-    //     v.map((e) => {
-    //       delete e.id;
+    let fetchedSheets = await getData(CONFIG.sheetsData, sheet);
+    setSheetData(fetchedSheets);
+    //setting cell sizes
+    setCellSize([...new Array(Object.keys(fetchedSheets[0]).length).fill(500)]);
 
-    //       return e;
-    //     })
-    //   );
+    // setCellSize();
     setIsLoading((prev) => !prev);
   };
 
@@ -43,18 +50,21 @@ export default function DataTable() {
 
   if (isLoading)
     return (
-      <div>
-        <span>XD</span>
+      <div className="w-full h-full flex items-center justify-center">
+        <span>LOOOOODING</span>
       </div>
     );
   else
     return (
       <div className="w-full overflow-auto  tableContainer">
-        <div className="table w-full tableColor h-full  bg-slate-500">
-          <TableHeader row={Object.keys(sheetData[0])} specialClasses="" />
-          {sheetData.map((v, c) => (
-            <TableRow divNumber={c} row={v} key={c} specialClasses="" />
-          ))}
+        <div className="table  w-full tableColor h-full  custom-table">
+          <TableContext.Provider
+            value={{ cellSizeValues, setCellValue: cellResizer }}>
+            <TableHeader row={Object.keys(sheetData[0])} specialClasses="" />
+            {sheetData.map((v, c) => (
+              <TableRow divNumber={c} row={v} key={c} specialClasses="" />
+            ))}
+          </TableContext.Provider>
         </div>
       </div>
     );

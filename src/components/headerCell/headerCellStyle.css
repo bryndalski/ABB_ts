@@ -1,0 +1,13 @@
+.tableHeaderCellContainer {
+  /* z-index: 1; */
+  /* background-color: brown; */
+  /* cursor: e-resize; */
+  resize: horizontal;
+}
+
+/* .tableHeaderCellContainer p {
+  width: calc(100% - 3px);
+  height: 100%;
+  pointer-events: none;
+  background-color: blanchedalmond;
+} */

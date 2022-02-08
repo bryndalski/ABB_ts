@@ -10,7 +10,7 @@ export default function TableCell(props: propsInterface) {
   const [cellValue, setCellValue] = useState(props.value);
 
   return (
-    <div className="table-cell text-center ">
+    <div className="table-cell text-center cell-container">
       <textarea
         // disabled={props.editable}
         className="  border-solid border-2 resize-none  overflow-ellipsis  cell focus:outline-none focus:border-blue-500"

@@ -5,4 +5,15 @@
   width: 100%;
   height: 100%;
   text-align: center;
+  word-break: keep-all;
+  word-wrap: unset;
+  position: relative;
+}
+/* 
+.row{
+
+} */
+.cell-container {
+  height: 100px;
+  min-height: 100px;
 }

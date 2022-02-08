@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
+//context
 
+import HeaderCell from "../headerCell/HeaderCell"; //styles
 interface propsInterface {
   row: Object;
   divNumber?: number;
@@ -8,15 +10,11 @@ interface propsInterface {
 
 export default function TableHeader(props: propsInterface) {
   return (
-    <div className="table-row  text-justify">
+    <div className="table-row  text-justify  ">
+      <p className="table-cell p-2 text-center w-6"></p>
       {Object.values(props.row).map((e, c) => {
         if (e === "id" && c === 0) {
-        } else
-          return (
-            <p key={c} className="table-cell p-2 text-center">
-              {e}
-            </p>
-          );
+        } else return <HeaderCell value={e} cellNumber={c} key={c} />;
       })}
     </div>
   );
