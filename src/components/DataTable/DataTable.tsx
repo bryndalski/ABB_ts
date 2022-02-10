@@ -46,8 +46,6 @@ export default function DataTable() {
     // setSheetData(TEST_DATA);
   }, [sheet]);
 
-  useDebugValue(sheetData != [] ? console.log(sheetData) : "Penis");
-
   if (isLoading)
     return (
       <div className="w-full h-full flex items-center justify-center">

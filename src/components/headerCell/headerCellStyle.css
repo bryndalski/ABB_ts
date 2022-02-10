@@ -1,13 +1,22 @@
-.tableHeaderCellContainer {
-  /* z-index: 1; */
-  /* background-color: brown; */
-  /* cursor: e-resize; */
-  resize: horizontal;
+/* .tableHeaderCellContainer p {
+  display: inline-block;
+} */
+.borderLight {
+  border-left-color: pink;
 }
 
-/* .tableHeaderCellContainer p {
+.cellName {
   width: calc(100% - 3px);
-  height: 100%;
-  pointer-events: none;
-  background-color: blanchedalmond;
-} */
+  text-align: center;
+}
+
+.catchBoard:hover {
+  cursor: e-resize;
+}
+
+.catchBoard {
+  height: 30px;
+  /* margin-left: auto; */
+  width: 3px;
+  background-color: rebeccapurple;
+}

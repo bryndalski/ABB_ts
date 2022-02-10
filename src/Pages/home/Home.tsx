@@ -8,10 +8,10 @@ import SheetContext from "../../context/SheetContext";
 
 export default function Home() {
   const [sheet, setSheet] = useState("");
-
+  const [filter, setFilter] = useState("");
   return (
     <div className="w-screen h-screen overflow-hidden">
-      <SheetContext.Provider value={{ sheet, setSheet }}>
+      <SheetContext.Provider value={{ sheet, setSheet, filter, setFilter }}>
         <Header></Header>
         <DataTable></DataTable>
       </SheetContext.Provider>

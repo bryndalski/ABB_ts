@@ -1,0 +1,6 @@
+.filterInput {
+}
+
+.filterInput:focus {
+  outline: 0;
+}
