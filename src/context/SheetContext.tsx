@@ -5,6 +5,8 @@ const SheetContext = createContext({
   setSheet: (sheetName: string) => {},
   filter: "",
   setFilter: (filterValue: string) => {},
+  filterVisibility: false,
+  setFilterVisibility: (value: boolean): any => {},
 });
 
 export default SheetContext;

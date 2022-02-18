@@ -17,7 +17,7 @@ import TableHeader from "../tableHeader/TableHeader";
 
 export default function DataTable() {
   //using context
-  const { sheet } = useContext(SheetContext);
+  const { sheet, filter } = useContext(SheetContext);
   const { setCellValue } = useContext(TableContext);
   //states
   const [sheetData, setSheetData] = useState<Array<object>>(new Array()); // all the sheets
