@@ -5,6 +5,9 @@ module.exports = {
       minHeight: {
         '96': '24rem',
       },
+      m: {
+        "0-auto":"0 auto"
+      }
     },
   },
   plugins: [],

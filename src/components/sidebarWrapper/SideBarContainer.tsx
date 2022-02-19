@@ -6,10 +6,10 @@ import { AiOutlineClose } from "react-icons/ai";
 import SideBarInterface from "./SideBarInterface";
 export default function SideBarContainer(props: SideBarInterface) {
   return (
-    <div className={`sidebar ${!props.isVisible ? "hidden" : ""}`}>
-      <div>
+    <div className={`sidebar ${!true ? "hidden" : ""}`}>
+      <div className="p-3">
         <AiOutlineClose
-          className="align-end"
+          className="block ml-auto cursor-pointer text-xl"
           onClick={() => props.changeVisible(false)}
         />
       </div>
