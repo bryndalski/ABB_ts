@@ -12,12 +12,11 @@ import SheetContext from "../../context/SheetContext";
 import TableContext from "../../context/TableContext";
 
 //!!! TEST
-import TEST_DATA from "./TEST.json";
 import TableHeader from "../tableHeader/TableHeader";
 
 export default function DataTable() {
   //using context
-  const { sheet, filter } = useContext(SheetContext);
+  const { sheet, filter, setColumnNames } = useContext(SheetContext);
   const { setCellValue } = useContext(TableContext);
   //states
   const [sheetData, setSheetData] = useState<Array<object>>(new Array()); // all the sheets
@@ -36,7 +35,7 @@ export default function DataTable() {
     setSheetData(fetchedSheets);
     //setting cell sizes
     setCellSize([...new Array(Object.keys(fetchedSheets[0]).length).fill(500)]);
-
+    setColumnNames([...Object.keys(fetchedSheets[0])]);
     // setCellSize();
     setIsLoading((prev) => !prev);
   };

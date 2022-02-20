@@ -10,7 +10,7 @@ const SheetContext = createContext({
   setFilterVisibility: (value: boolean): any => {},
   //?column names
   columnNames: [],
-  setColumnNames: (value: []): any => {},
+  setColumnNames: (value: string[] | any): any => {},
 });
 
 export default SheetContext;

@@ -1,6 +1,6 @@
 .sidebar {
   position: absolute;
-  width: 25%;
+  min-width: fit-content;
   height: calc(100% - 4.2rem);
   z-index: 10000;
   right: 0;

@@ -8,7 +8,6 @@ import SideBarFilter from "../../components/SideBarFilter/SideBarFilter";
 import SheetContext from "../../context/SheetContext";
 
 //!!!TEST
-import SideBarContainer from "../../components/sidebarWrapper/SideBarContainer";
 export default function Home() {
   const [sheet, setSheet] = useState(""); // coutent sheet
   const [filter, setFilter] = useState(""); //courrent filter
