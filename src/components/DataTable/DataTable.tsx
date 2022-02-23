@@ -31,6 +31,7 @@ export default function DataTable() {
 
   const controllAsync = async () => {
     setIsLoading(true);
+    setColumnNames([]);
     let fetchedSheets = await getData(CONFIG.sheetsData, sheet);
     setSheetData(fetchedSheets);
     //setting cell sizes
