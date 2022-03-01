@@ -13,7 +13,7 @@ export default function DynamicCheckbox(props: DynamicCheckboxInterface) {
             setChecked((v) => !v);
           }}
         />
-        <span>{props.label}</span>
+        <span className="ml-1">{props.label}</span>
       </div>
     </div>
   );

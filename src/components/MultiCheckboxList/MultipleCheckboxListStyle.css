@@ -1,0 +1,18 @@
+/* .littleSctoll::-webkit-scrollbar {
+  width: 0.2rem;
+} */
+
+/* Track */
+/* .littleSctoll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+} */
+
+/* Handle */
+/* .littleSctoll::-webkit-scrollbar-thumb {
+  background: rgb(30, 58, 138);
+} */
+
+/* Handle on hover */
+/* .littleSctoll::-webkit-scrollbar-thumb:hover {
+  background: rgb(30, 58, 138);
+} */

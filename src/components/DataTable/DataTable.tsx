@@ -13,7 +13,7 @@ import TableContext from "../../context/TableContext";
 
 //!!! TEST
 import TableHeader from "../tableHeader/TableHeader";
-
+import { ImSpinner2 } from "react-icons/im";
 export default function DataTable() {
   //using context
   const { sheet, filter, setColumnNames } = useContext(SheetContext);
@@ -49,7 +49,7 @@ export default function DataTable() {
   if (isLoading)
     return (
       <div className="w-full h-full flex items-center justify-center">
-        <span>LOOOOODING</span>
+        <ImSpinner2 className="animate-spin text-3xl text-blue-900" />
       </div>
     );
   else
