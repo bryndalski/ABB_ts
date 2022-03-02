@@ -14,8 +14,6 @@ export default function AsyncSwitch() {
   //fetching data
   let fetchingError = 10;
   const fetchData = () => {
-    console.log("nawala");
-
     axios({
       method: "get",
       url: CONFIG.allSheetsNames,
@@ -24,7 +22,6 @@ export default function AsyncSwitch() {
       },
     })
       .then((res) => {
-        console.log(res);
         SetSelectOptions(res.data);
         SetIsLoadingOrError((prev) => !prev);
         setSheet(res.data[0].label);

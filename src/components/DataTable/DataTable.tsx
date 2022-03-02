@@ -60,6 +60,7 @@ export default function DataTable() {
             value={{ cellSizeValues, setCellValue: cellResizer }}>
             <TableHeader row={Object.keys(sheetData[0])} specialClasses="" />
             {sheetData.map((v, c) => (
+              //@ts-ignore
               <TableRow divNumber={c} row={v} key={c} specialClasses="" />
             ))}
           </TableContext.Provider>
