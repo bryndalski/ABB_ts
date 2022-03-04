@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import textReducer from "./textReducer";
 
 import TableCell from "../singleTableCell/TableCell";
@@ -13,16 +13,18 @@ interface propsInterface {
 
 //single row
 export default function TableRow(props: propsInterface) {
-  const [rowValues, setRowValues] = useState(props.row);
+  const [rowValues, setRowValues] = useState({ ...props.row });
+  const [olderValue, setOlderValue] = useState({ ...props.row });
   const { sheet } = useContext(SheetContext);
   return (
     <div
       className="table-row  text-justify"
       onBlur={() => {
         // SendRowData();
-        console.log(rowValues);
-        if (JSON.stringify(rowValues) === JSON.stringify(props.row))
+        if (JSON.stringify(rowValues) !== JSON.stringify(olderValue)) {
           SendRowData(props.row.id, sheet, rowValues);
+          setOlderValue({ ...rowValues });
+        }
       }}>
       <div className="table-cell border-solid border-2 text-center align-middle">
         <p className="">{props.divNumber}</p>
