@@ -1,45 +1,43 @@
 import React, { useEffect, useState, useCallback, useContext } from "react";
 import axios from "axios";
-import CONFIG from "../../CONFIG.json";
-import "./AsyncSwitchStyle.css";
+import { observer } from "mobx-react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import SheetContext from "../../context/SheetContext";
 
-export default function AsyncSwitch() {
-  const [SelectOptions, SetSelectOptions] = useState([]);
-  const [isLoadingOrError, SetIsLoadingOrError] = useState(true);
+//Config
+import CONFIG from "../../CONFIG.json";
+//?Styles
+import "./AsyncSwitchStyle.css";
+//!! REMOVE ME
+import SheetContext from "../../context/SheetContext"; //TODO move to mobx
+
+// Storage
+import appStore from "../../storage/AppStore";
+
+function AsyncSwitchComponent() {
+  const [SelectOptions, SetSelectOptions] = useState<string[]>([]); // data array
+  const [isLoadingOrError, SetIsLoadingOrError] = useState<boolean>(true); // fetchnig data in progress ?
   //context
-  const { setSheet } = useContext(SheetContext);
 
   //fetching data
-  let fetchingError = 10;
   const fetchData = () => {
-    axios({
-      method: "get",
-      url: CONFIG.allSheetsNames,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
+    axios(CONFIG.allSheetsNames)
       .then((res) => {
         SetSelectOptions(res.data);
         SetIsLoadingOrError((prev) => !prev);
-        setSheet(res.data[0].label);
+        appStore.setCurrentSheet(res.data[0].label);
       })
       .catch((e) => {
         console.warn(e);
-        if (fetchingError > 0) {
-          // setTimeout(fetchData, 5000);
-          fetchingError--;
-        }
       });
   };
 
   //fetching switch data
   useEffect(() => {
-    fetchData();
+    fetchData(); // fetching data
   }, []);
-  //Redner switch options
+  /**
+   * Generates swithc options
+   */
   const renderOptions = useCallback(
     () =>
       SelectOptions.map((e: any, c: number) => (
@@ -49,7 +47,10 @@ export default function AsyncSwitch() {
       )),
     [SelectOptions]
   );
+
+  //render based on data ready
   if (isLoadingOrError)
+    //no data fetched
     return (
       <div className="min-w-[127px] max-w-fit bg-white p-3 rounded-md flex flex-row align-baseline ">
         <AiOutlineLoading3Quarters className="animate-spin inline-block self-center mr-2" />
@@ -58,10 +59,12 @@ export default function AsyncSwitch() {
     );
   else
     return (
+      //data fetched and rendered
       <div>
         <select
+          value={appStore.sheet}
           onChange={(e) => {
-            setSheet(e.target.value);
+            appStore.setCurrentSheet(e.target.value);
           }}
           className="select_input p-3 rounded-md">
           {renderOptions()}
@@ -69,3 +72,6 @@ export default function AsyncSwitch() {
       </div>
     );
 }
+
+const AsyncSwitch = observer(AsyncSwitchComponent);
+export default AsyncSwitch;

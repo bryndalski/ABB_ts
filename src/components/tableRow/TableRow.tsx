@@ -5,6 +5,11 @@ import TableCell from "../singleTableCell/TableCell";
 
 import SendRowData from "./SendRowData";
 import SheetContext from "../../context/SheetContext";
+
+//icons
+
+import { FiTrash } from "react-icons/fi";
+
 interface propsInterface {
   row: { id: number };
   divNumber?: number;
@@ -26,8 +31,11 @@ export default function TableRow(props: propsInterface) {
           setOlderValue({ ...rowValues });
         }
       }}>
-      <div className="table-cell border-solid border-2 text-center align-middle">
+      <div className="table-cell noselect border-solid border-2 text-center align-middle">
         <p className="">{props.divNumber}</p>
+      </div>
+      <div className="table-cell bg-white noselect border-solid border-2 text-center align-middle ">
+        <FiTrash className="text-center margin-center flex justify-center hover:text-blue-900 curs or-pointer" />
       </div>
       {Object.keys(props.row).map((e, c) => {
         if (Object.keys(props.row)[0] === "id" && c === 0) {

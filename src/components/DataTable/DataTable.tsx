@@ -1,70 +1,65 @@
-import React, { useContext, useEffect, useState, useDebugValue } from "react";
+import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react";
+
 //functions
-import getData from "./GetSheetContent";
+import getData from "./getData";
 //config
 import CONFIG from "../../CONFIG.json";
 //style
 import "./tableStyles.css";
 //components
 import TableRow from "../tableRow/TableRow";
-//context
-import SheetContext from "../../context/SheetContext";
-import TableContext from "../../context/TableContext";
+//MOBX upgreade
+import appStore from "../../storage/AppStore";
 
 //!!! TEST
 import TableHeader from "../tableHeader/TableHeader";
 import { ImSpinner2 } from "react-icons/im";
-export default function DataTable() {
-  //using context
-  const { sheet, filter, setColumnNames } = useContext(SheetContext);
-  const { setCellValue } = useContext(TableContext);
+
+function DataTableComponent() {
   //states
-  const [sheetData, setSheetData] = useState<Array<object>>(new Array()); // all the sheets
+  const [sheetData, setSheetData] = useState<Array<object>>([]); // all the sheets
   const [isLoading, setIsLoading] = useState<boolean>(true); // is waiting for sheetData
-  const [cellSizeValues, setCellSize] = useState<Array<number>>([]); // table cell sizes → for resize
-  //context helpers
-  const cellResizer = (value: number, columnNumber: number): void => {
-    let cellSizes: Array<number> = [...cellSizeValues];
-    cellSizes[columnNumber] = value;
-    setCellSize([...cellSizes]);
-  };
 
   const controllAsync = async () => {
-    setIsLoading(true);
-    setColumnNames([]);
-    let fetchedSheets = await getData(CONFIG.sheetsData, sheet);
+    setIsLoading(true); // start loading signature
+    appStore.setColumnNames({});
+    let fetchedSheets = await getData(CONFIG.sheetsData, appStore.sheet); // get new sheet content
     setSheetData(fetchedSheets);
-    //setting cell sizes
-    setCellSize([...new Array(Object.keys(fetchedSheets[0]).length).fill(500)]);
-    setColumnNames([...Object.keys(fetchedSheets[0])]);
-    // setCellSize();
-    setIsLoading((prev) => !prev);
-  };
+    appStore.setColumnNames(fetchedSheets[0]); // set column names
 
+    setIsLoading((prev) => !prev); // stops loadin
+  };
+  //watch for sheet change to trigger refresing table data
+  //TODO add force reset
   useEffect(() => {
-    if (sheet != "") controllAsync();
-    // setSheetData(TEST_DATA);
-  }, [sheet]);
+    if (appStore.sheet != "") controllAsync();
+  }, [appStore.sheet]);
+
+  //Renders
 
   if (isLoading)
+    // waiting for data
     return (
       <div className="w-full h-full flex items-center justify-center">
         <ImSpinner2 className="animate-spin text-3xl text-blue-900" />
       </div>
     );
+  //data is here
   else
     return (
       <div className="w-full overflow-auto  tableContainer">
         <div className="table  w-full tableColor h-full  custom-table">
-          <TableContext.Provider
-            value={{ cellSizeValues, setCellValue: cellResizer }}>
-            <TableHeader row={Object.keys(sheetData[0])} specialClasses="" />
-            {sheetData.map((v, c) => (
-              //@ts-ignore
-              <TableRow divNumber={c} row={v} key={c} specialClasses="" />
-            ))}
-          </TableContext.Provider>
+          <TableHeader row={Object.keys(sheetData[0])} specialClasses="" />
+          {sheetData.map((v, c) => (
+            //@ts-ignore
+            <TableRow divNumber={c} row={v} key={c} specialClasses="" />
+          ))}
         </div>
       </div>
     );
 }
+
+const DataTable = observer(DataTableComponent);
+
+export default DataTable;
