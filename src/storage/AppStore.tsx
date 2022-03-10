@@ -1,10 +1,16 @@
 import { makeAutoObservable } from "mobx";
 import { observer } from "mobx-react-lite";
+import FilterInterface from "./interfaces/FilterInterface";
 //helpers
 
 class AppStore {
   sheet: string = ""; // contains courrent selected sheet
   columnNames: string[] = []; // contains list of all columns in courrent sheet
+  filter: FilterInterface = {
+    invisibleColums: [],
+    sidebarVisible: false,
+    value: "",
+  };
   constructor() {
     makeAutoObservable(this);
   }
@@ -26,6 +32,13 @@ class AppStore {
    */
   setColumnNames(exampleRow: Object) {
     this.columnNames = Object.keys(exampleRow);
+  }
+  /**
+   * Changes opotion of filter
+   * @param options
+   */
+  setFilterOption(options: { name: string; value: string | boolean }[]) {
+    options.forEach((e) => (this.filter[e.name] = e.value));
   }
 }
 

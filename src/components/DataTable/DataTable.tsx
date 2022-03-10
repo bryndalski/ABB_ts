@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useDebugValue } from "react";
 import { observer } from "mobx-react";
 
 //functions
@@ -36,7 +36,12 @@ function DataTableComponent() {
     if (appStore.sheet != "") controllAsync();
   }, [appStore.sheet]);
 
+  useEffect(() => {
+    console.log(appStore.filter);
+  }, [appStore.filter.invisibleColums]);
   //Renders
+
+  useDebugValue(console.log(JSON.stringify(appStore.filter)));
 
   if (isLoading)
     // waiting for data

@@ -1,25 +1,21 @@
-import React, { useState, useContext } from "react";
+import React from "react";
+import { observer } from "mobx-react";
 import SideBarContainer from "../sidebarWrapper/SideBarContainer";
-import SheetContext from "../../context/SheetContext";
 import { FiFilter } from "react-icons/fi";
 import MultiCheckboxList from "../MultiCheckboxList/MultiCheckboxList";
 //css
 import "./SideBarFilterStyles.css";
-
-export default function SideBarFilter() {
-  const {
-    columnNames,
-    filterVisibility,
-    setFilterVisibility,
-    filter,
-    setFilter,
-  } = useContext(SheetContext);
+//MOBX
+import appStore from "../../storage/AppStore";
+function SideBarFilterComponent() {
   //filter
 
   return (
     <SideBarContainer
-      isVisible={filterVisibility}
-      changeVisible={setFilterVisibility}>
+      isVisible={appStore.filter.sidebarVisible}
+      changeVisible={() =>
+        appStore.setFilterOption([{ name: "sidebarVisible", value: false }])
+      }>
       <span className="block text-center">Opcje Filtra</span>
       <section className="p-2">
         <span>Aktualny filter</span>
@@ -29,8 +25,15 @@ export default function SideBarFilter() {
             className=" m-0  rounded-r-md pt-1 pb-1 focus:outline-none font-bold"
             placeholder="znajdź w tabeli"
             type="text"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
+            value={appStore.filter.value}
+            onChange={(e) =>
+              appStore.setFilterOption([
+                {
+                  name: "value",
+                  value: e.target.value as string,
+                },
+              ])
+            }
           />
         </div>
       </section>
@@ -38,9 +41,12 @@ export default function SideBarFilter() {
         <span>Szukaj w kolumnach:</span>
         <MultiCheckboxList
           multi={true}
-          data={columnNames}
+          data={appStore.columnNames}
           value={null}></MultiCheckboxList>
       </section>
     </SideBarContainer>
   );
 }
+
+const SideBarFilter = observer(SideBarFilterComponent);
+export default SideBarFilter;

@@ -19,6 +19,14 @@ export default function MultiCheckboxList(props: MultiCheckboxInterface) {
     setCheckbox(reducerInit(props.data));
   }, [props.data]);
 
+  useDebugValue(console.log(JSON.stringify(checkbox)));
+
+  const change = (index: number) => {
+    let tmpArray = checkbox;
+    tmpArray[index].checked = !tmpArray[index].checked;
+    setCheckbox([...tmpArray]);
+  };
+
   if (checkbox.length === 0)
     return (
       <div className="p-2 w-full flex justify-around border-solid ">
@@ -34,7 +42,13 @@ export default function MultiCheckboxList(props: MultiCheckboxInterface) {
           <span className="ml-1">Zaznacz wszystkie</span>
         </div>
         {checkbox.map((e: CheckBoxArrayInterface, c: number) => (
-          <DynamicCheckbox key={c} label={e.label} checked={e.checked} />
+          <DynamicCheckbox
+            key={c}
+            index={c}
+            label={e.label}
+            checked={e.checked}
+            change={(index: number) => change(index)}
+          />
         ))}
       </div>
     );

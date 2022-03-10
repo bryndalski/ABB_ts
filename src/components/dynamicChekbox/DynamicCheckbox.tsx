@@ -11,6 +11,7 @@ export default function DynamicCheckbox(props: DynamicCheckboxInterface) {
           checked={checked}
           onChange={() => {
             setChecked((v) => !v);
+            props.change(props.index);
           }}
         />
         <span className="ml-1">{props.label}</span>
