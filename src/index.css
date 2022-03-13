@@ -26,7 +26,7 @@
   .littleSctoll::-webkit-scrollbar-thumb:hover {
     @apply bg-blue-600;
   }
-  //Disable text selectiuon
+  /* Disable text selectiuon */
   .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
