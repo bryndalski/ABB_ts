@@ -15,6 +15,7 @@ import appStore from "../../storage/AppStore";
 //!!! TEST
 import TableHeader from "../tableHeader/TableHeader";
 import { ImSpinner2 } from "react-icons/im";
+import filter from "./filter";
 
 function DataTableComponent() {
   //states
@@ -37,8 +38,10 @@ function DataTableComponent() {
   }, [appStore.sheet]);
 
   useEffect(() => {
-    console.log(appStore.filter);
-  }, [appStore.filter.invisibleColums]);
+    console.log(
+      filter(appStore.filter.value, appStore.filter.invisibleColums, sheetData)
+    );
+  }, [appStore.filter.value, appStore.filter.invisibleColums]);
   //Renders
 
   useDebugValue(console.log(JSON.stringify(appStore.filter)));

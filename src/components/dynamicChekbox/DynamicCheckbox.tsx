@@ -4,7 +4,12 @@ import DynamicCheckboxInterface from "./DynamicCheckboxInterface";
 export default function DynamicCheckbox(props: DynamicCheckboxInterface) {
   const [checked, setChecked] = useState(props.checked);
   return (
-    <div>
+    <div
+      className="cursor-pointer noselect"
+      onClick={() => {
+        setChecked((v) => !v);
+        props.change(props.index);
+      }}>
       <div>
         <input
           type="checkbox"
@@ -14,7 +19,7 @@ export default function DynamicCheckbox(props: DynamicCheckboxInterface) {
             props.change(props.index);
           }}
         />
-        <span className="ml-1">{props.label}</span>
+        <span className="ml-1 noselect">{props.label}</span>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useDebugValue } from "react";
 import { observer } from "mobx-react";
 import SideBarContainer from "../sidebarWrapper/SideBarContainer";
 import { FiFilter } from "react-icons/fi";
@@ -9,7 +9,6 @@ import "./SideBarFilterStyles.css";
 import appStore from "../../storage/AppStore";
 function SideBarFilterComponent() {
   //filter
-
   return (
     <SideBarContainer
       isVisible={appStore.filter.sidebarVisible}
@@ -42,7 +41,9 @@ function SideBarFilterComponent() {
         <MultiCheckboxList
           multi={true}
           data={appStore.columnNames}
-          value={null}></MultiCheckboxList>
+          onChange={(value: []) => {
+            appStore.setFilterOption([{ name: "invisibleColums", value }]);
+          }}></MultiCheckboxList>
       </section>
     </SideBarContainer>
   );

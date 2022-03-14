@@ -14,19 +14,23 @@ export default function MultiCheckboxList(props: MultiCheckboxInterface) {
   const [checkbox, setCheckbox] = useState<Array<CheckBoxArrayInterface>>(
     reducerInit(props.data)
   );
-
+  //Sets value to checkbox
   useEffect(() => {
     setCheckbox(reducerInit(props.data));
   }, [props.data]);
 
-  useDebugValue(console.log(JSON.stringify(checkbox)));
-
+  /**
+   * Handles change of single checkkbox and on change prop
+   * @param index
+   */
   const change = (index: number) => {
     let tmpArray = checkbox;
     tmpArray[index].checked = !tmpArray[index].checked;
+    props.onChange([...tmpArray]);
     setCheckbox([...tmpArray]);
   };
 
+  //handles loading of list
   if (checkbox.length === 0)
     return (
       <div className="p-2 w-full flex justify-around border-solid ">
