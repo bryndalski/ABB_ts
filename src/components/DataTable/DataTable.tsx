@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useDebugValue } from "react";
 import { observer } from "mobx-react";
-
+import { toJS } from "mobx";
 //functions
 import getData from "./getData";
 //config
@@ -38,13 +38,17 @@ function DataTableComponent() {
   }, [appStore.sheet]);
 
   useEffect(() => {
-    console.log(
-      filter(appStore.filter.value, appStore.filter.invisibleColums, sheetData)
-    );
+    console.log("====================================");
+    console.log("====================================");
+    console.log("xd");
+    console.log("====================================");
+    console.log(toJS(appStore.filter.invisibleColums));
+    console.log("====================================");
+    // console.log(
+    //   filter(appStore.filter.value, appStore.filter.invisibleColums, sheetData)
+    // );
   }, [appStore.filter.value, appStore.filter.invisibleColums]);
   //Renders
-
-  useDebugValue(console.log(JSON.stringify(appStore.filter)));
 
   if (isLoading)
     // waiting for data
