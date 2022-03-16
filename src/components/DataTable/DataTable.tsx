@@ -36,15 +36,15 @@ function DataTableComponent() {
   useEffect(() => {
     if (appStore.sheet != "") controllAsync();
   }, [appStore.sheet]);
-
+  //TODO
   useEffect(() => {
-    console.log("====================================");
-    console.log("====================================");
-    console.log("xd");
-    console.log("====================================");
-    console.log(toJS(appStore.filter.invisibleColums));
-    console.log("====================================");
-    // console.log(
+    // console.log("====================================");
+    // console.log("====================================");
+    // console.log("xd");
+    // console.log("====================================");
+    // console.log(toJS(appStore.filter.invisibleColums));
+    // console.log("====================================");
+    // // console.log(
     //   filter(appStore.filter.value, appStore.filter.invisibleColums, sheetData)
     // );
   }, [appStore.filter.value, appStore.filter.invisibleColums]);

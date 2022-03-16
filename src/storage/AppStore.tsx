@@ -8,7 +8,7 @@ class AppStore {
   columnNames: string[] = []; // contains list of all columns in courrent sheet
   filter: FilterInterface = {
     invisibleColums: [],
-    sidebarVisible: false,
+    sidebarVisible: true, //TODO change false
     value: "",
   };
   constructor() {
