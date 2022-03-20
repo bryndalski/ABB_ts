@@ -39,7 +39,9 @@ function SideBarFilterComponent() {
       <section className="p-2">
         <span>Szukaj w kolumnach:</span>
         <MultiCheckboxList
+          label="Ukryte kolumny"
           multi={true}
+          showSelected={true}
           data={appStore.columnNames}
           onChange={(value: []) => {
             appStore.setFilterOption([{ name: "invisibleColums", value }]);

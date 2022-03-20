@@ -9,4 +9,6 @@ export default interface MultiCheckboxInterface {
   multi: boolean
   data: Array<string>
   onChange: Function
+  label: string
+  showSelected: boolean
 }

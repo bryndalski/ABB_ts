@@ -10,17 +10,17 @@ export default function DynamicCheckbox(props: DynamicCheckboxInterface) {
         setChecked((v) => !v);
         props.change(props.index);
       }}>
-      <div className="flex flex-row align-middle justify-between hover:bg-blue-600 ">
+      <div className="flex flex-row align-middle justify-between hover:text-white p-2 hover:bg-blue-600 ">
         <input
-          type="checkbox"
-          className="w-5 h-5 block self-center "
+          type={props.type}
+          className="  block self-center "
           checked={checked}
           onChange={() => {
             setChecked((v) => !v);
             props.change(props.index);
           }}
         />
-        <span className="ml-1 noselect block">{props.label}</span>
+        <span className="ml-1 noselect block text-right	">{props.label}</span>
       </div>
     </div>
   );
