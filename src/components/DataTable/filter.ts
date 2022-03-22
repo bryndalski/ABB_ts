@@ -1,19 +1,14 @@
 const filter = (
   value: string,
   invisibleColums: string[],
-  data: Array<any>,
+  inputData: Array<any>,
 ): Object[] => {
   // gets rid of unwanted columns
-  console.log('KLUCZE')
-  console.log(invisibleColums)
-
-  data.forEach((e) => {
-    invisibleColums.map((key) => delete e[key])
-    console.log(e)
-  })
-  // console.log(data)
+  let data: Array<any> = JSON.parse(JSON.stringify(inputData))
+  console.log(data)
+  //removes keys
+  data = data.filter((e) => invisibleColums.map((key) => delete e[key]))
   //FilterValues
-
   data = data.filter((e) =>
     Object.values(e).join('').includes(value) ? e : null,
   )

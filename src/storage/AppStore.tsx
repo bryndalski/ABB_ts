@@ -37,7 +37,9 @@ class AppStore {
    * Changes opotion of filter
    * @param options
    */
-  setFilterOption(options: { name: string; value: string | boolean | [] }[]) {
+  setFilterOption(
+    options: { name: string; value: string | boolean | string[] }[]
+  ) {
     options.forEach((e) => (this.filter[e.name] = e.value));
   }
 }

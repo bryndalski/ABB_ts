@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useDebugValue } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
 //functions
@@ -21,14 +21,27 @@ function DataTableComponent() {
   //states
   const [sheetData, setSheetData] = useState<Array<object>>([]); // all the sheets
   const [isLoading, setIsLoading] = useState<boolean>(true); // is waiting for sheetData
-
+  //memo
+  const filterValue = useMemo(
+    () =>
+      filter(
+        appStore.filter.value,
+        toJS(appStore.filter.invisibleColums),
+        sheetData
+      ),
+    [
+      appStore.filter.value,
+      toJS(appStore.filter.invisibleColums),
+      JSON.stringify(sheetData),
+    ]
+  );
   const controllAsync = async () => {
     setIsLoading(true); // start loading signature
     appStore.setColumnNames({});
+    appStore.setFilterOption([{ name: "invisibleColums", value: [] }]); /// clears all options in filter
     let fetchedSheets = await getData(CONFIG.sheetsData, appStore.sheet); // get new sheet content
-    setSheetData(fetchedSheets);
+    setSheetData(fetchedSheets); // set new sheet data
     appStore.setColumnNames(fetchedSheets[0]); // set column names
-
     setIsLoading((prev) => !prev); // stops loadin
   };
   //watch for sheet change to trigger refresing table data
@@ -36,19 +49,6 @@ function DataTableComponent() {
   useEffect(() => {
     if (appStore.sheet != "") controllAsync();
   }, [appStore.sheet]);
-  //TODO
-  useEffect(() => {
-    // console.log("====================================");
-    // console.log("====================================");
-    // console.log("xd");
-    // console.log("====================================");
-    // console.log(toJS(appStore.filter.invisibleColums));
-    // console.log("====================================");
-    // // console.log(
-    //   filter(appStore.filter.value, appStore.filter.invisibleColums, sheetData)
-    // );
-  }, [appStore.filter.value, appStore.filter.invisibleColums]);
-  //Renders
 
   if (isLoading)
     // waiting for data
@@ -58,12 +58,18 @@ function DataTableComponent() {
       </div>
     );
   //data is here
+  else if (sheetData.length === 0)
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <ImSpinner2 className="animate-spin text-3xl text-blue-900" />
+      </div>
+    );
   else
     return (
       <div className="w-full overflow-auto  tableContainer">
         <div className="table  w-full tableColor h-full  custom-table">
-          <TableHeader row={Object.keys(sheetData[0])} specialClasses="" />
-          {sheetData.map((v, c) => (
+          <TableHeader row={Object.keys(filterValue[0])} specialClasses="" />
+          {filterValue.map((v, c) => (
             //@ts-ignore
             <TableRow divNumber={c} row={v} key={c} specialClasses="" />
           ))}

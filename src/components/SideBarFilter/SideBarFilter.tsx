@@ -43,8 +43,13 @@ function SideBarFilterComponent() {
           multi={true}
           showSelected={true}
           data={appStore.columnNames}
-          onChange={(value: []) => {
-            appStore.setFilterOption([{ name: "invisibleColums", value }]);
+          onChange={(value: { checked: boolean; label: string }[]) => {
+            let filterValues: string[] = value // creates string array of all  unwanted columns
+              .filter((e) => e.checked)
+              .map((e) => e.label);
+            appStore.setFilterOption([
+              { name: "invisibleColums", value: filterValues },
+            ]);
           }}></MultiCheckboxList>
       </section>
     </SideBarContainer>
