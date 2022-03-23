@@ -50,7 +50,7 @@ function DataTableComponent() {
     if (appStore.sheet != "") controllAsync();
   }, [appStore.sheet]);
 
-  if (isLoading)
+  if (isLoading || sheetData.length === 0)
     // waiting for data
     return (
       <div className="w-full h-full flex items-center justify-center">
@@ -58,21 +58,15 @@ function DataTableComponent() {
       </div>
     );
   //data is here
-  else if (sheetData.length === 0)
-    return (
-      <div className="w-full h-full flex items-center justify-center">
-        <ImSpinner2 className="animate-spin text-3xl text-blue-900" />
-      </div>
-    );
   else
     return (
       <div className="w-full overflow-auto  tableContainer">
         <div className="table  w-full tableColor h-full  custom-table">
           <TableHeader row={Object.keys(filterValue[0])} specialClasses="" />
-          {filterValue.map((v, c) => (
+          {/* {filterValue.map((v, c) => (
             //@ts-ignore
             <TableRow divNumber={c} row={v} key={c} specialClasses="" />
-          ))}
+          ))} */}
         </div>
       </div>
     );

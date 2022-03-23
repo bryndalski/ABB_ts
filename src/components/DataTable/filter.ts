@@ -5,13 +5,13 @@ const filter = (
 ): Object[] => {
   // gets rid of unwanted columns
   let data: Array<any> = JSON.parse(JSON.stringify(inputData))
-  console.log(data)
   //removes keys
   data = data.filter((e) => invisibleColums.map((key) => delete e[key]))
   //FilterValues
   data = data.filter((e) =>
     Object.values(e).join('').includes(value) ? e : null,
   )
+  console.log(data)
 
   return [...data]
 }

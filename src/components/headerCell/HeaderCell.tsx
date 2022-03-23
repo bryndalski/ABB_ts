@@ -1,15 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
-import TableContext from "../../context/TableContext";
-import "./headerCellStyle.css";
-
+import React, { useState, useEffect, useDebugValue } from "react";
+import "./headerCellStyle.css"; //styles
 export default function HeaderCell(props: {
   value: string;
-  cellNumber: number;
+  cellNumber?: number;
+  width?: number;
 }) {
-  const { cellSizeValues } = useContext(TableContext);
   const [resizeEnable, setResizeEnable] = useState<boolean>(true);
-  const [cellSize, setCellSize] = useState(200);
+  const [cellSize, setCellSize] = useState(props.width || 200);
 
+  useDebugValue(console.log(cellSize));
   useEffect(() => {
     const onUpListener = (e: MouseEvent) => {
       setResizeEnable(false);
@@ -27,30 +26,14 @@ export default function HeaderCell(props: {
 
   return (
     <div
-      //   //   onMouseUp={() => {
-      //   //     console.log("podniesziono");
-      //   //     setResizeEnable(false);
-      //   //   }}
-
       style={{
         width: `${cellSize}px`,
       }}
-      className="table-cell  w-full">
-      <div className="flex flex-row resizableCell  w-full justify-center h-full">
-        <p className="cellName">{props.value}</p>
-        <div
-          className="catchBoard "
-          // onMouseDown={(e) => {
-          //   setResizeEnable((v) => !v);
-          // }}
-          onMouseMove={(e) => {
-            //@ts-ignore
-            if (resizeEnable) {
-              console.log(e.nativeEvent.offsetX, e.nativeEvent.pageX);
-              //   setCellSize(e.nativeEvent.offsetX + 200);
-            }
-          }}></div>
-      </div>
+      className="table-cell bg-red-500 h-8 max-h-8">
+      {/* <div className="flex-row justify-center "> */}
+      <p className="cellName bg-green-500">{props.value}</p>
+      {/* <div className="catchBoard "></div> */}
+      {/* </div> */}
     </div>
   );
 }

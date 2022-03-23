@@ -1,35 +1,23 @@
-import React, { useState } from "react";
-import { UserContext } from "../../context/UserContext";
+import React from "react";
 //components
 import Header from "../../components/Header/Header";
 import DataTable from "../../components/DataTable/DataTable";
 import SideBarFilter from "../../components/SideBarFilter/SideBarFilter";
-//context
-import SheetContext from "../../context/SheetContext";
+import appStore from "../../storage/AppStore";
+//mobix
+import { observer } from "mobx-react";
 
-//!!!TEST
-export default function Home() {
-  const [sheet, setSheet] = useState(""); // coutent sheet
-  const [filter, setFilter] = useState(""); //courrent filter
-  const [filterVisibility, setFilterVisibility] = useState(false); // filter sidebar visibility
-  const [columnNames, setColumnNames] = useState([]);
+function HomeComponent() {
   return (
-    <SheetContext.Provider
-      value={{
-        sheet,
-        setSheet,
-        filter,
-        setFilter,
-        filterVisibility,
-        setFilterVisibility,
-        columnNames,
-        setColumnNames,
-      }}>
+    <>
       <div className="w-screen h-screen overflow-hidden">
         <Header></Header>
         <DataTable></DataTable>
       </div>
-      <SideBarFilter></SideBarFilter>
-    </SheetContext.Provider>
+      {appStore.filter.sidebarVisible ? <SideBarFilter /> : null}
+    </>
   );
 }
+
+const Home = observer(HomeComponent);
+export default Home;

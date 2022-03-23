@@ -1,5 +1,5 @@
 export default interface SideBarInterface {
-  isVisible: boolean
+  // isVisible: boolean
   children?: any
   changeVisible: Function
 }

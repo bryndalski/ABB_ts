@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import { observer } from "mobx-react-lite";
 import FilterInterface from "./interfaces/FilterInterface";
 //helpers
 
@@ -8,7 +7,7 @@ class AppStore {
   columnNames: string[] = []; // contains list of all columns in courrent sheet
   filter: FilterInterface = {
     invisibleColums: [],
-    sidebarVisible: true, //TODO change false
+    sidebarVisible: false,
     value: "",
   };
   constructor() {
@@ -40,6 +39,7 @@ class AppStore {
   setFilterOption(
     options: { name: string; value: string | boolean | string[] }[]
   ) {
+    console.table(options);
     options.forEach((e) => (this.filter[e.name] = e.value));
   }
 }

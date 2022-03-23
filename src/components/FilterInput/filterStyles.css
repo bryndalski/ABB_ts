@@ -1,6 +1,13 @@
-.filterInput {
+.filterContainer-small {
 }
 
-.filterInput:focus {
+.filterContainer-big {
+}
+
+.filterContainer {
+  @apply bg-white;
+}
+
+.filterContainer:focus {
   outline: 0;
 }

@@ -1,4 +1,4 @@
-import React, { useDebugValue } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 import SideBarContainer from "../sidebarWrapper/SideBarContainer";
 import { FiFilter } from "react-icons/fi";
@@ -11,7 +11,6 @@ function SideBarFilterComponent() {
   //filter
   return (
     <SideBarContainer
-      isVisible={appStore.filter.sidebarVisible}
       changeVisible={() =>
         appStore.setFilterOption([{ name: "sidebarVisible", value: false }])
       }>
