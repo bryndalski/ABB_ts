@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  useDebugValue,
+} from "react";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
 //functions
@@ -27,7 +33,7 @@ function DataTableComponent() {
       filter(
         appStore.filter.value,
         toJS(appStore.filter.invisibleColums),
-        sheetData
+        JSON.parse(JSON.stringify(sheetData))
       ),
     [
       appStore.filter.value,
@@ -50,7 +56,9 @@ function DataTableComponent() {
     if (appStore.sheet != "") controllAsync();
   }, [appStore.sheet]);
 
-  if (isLoading || sheetData.length === 0)
+  useDebugValue(console.log(filterValue));
+
+  if (isLoading)
     // waiting for data
     return (
       <div className="w-full h-full flex items-center justify-center">
@@ -58,15 +66,23 @@ function DataTableComponent() {
       </div>
     );
   //data is here
+  else if (filterValue.length === 0)
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <span>Nie znaleziono wyników</span>
+      </div>
+    );
   else
     return (
       <div className="w-full overflow-auto  tableContainer">
-        <div className="table  w-full tableColor h-full  custom-table">
+        <div className="table  w-full tableColor max-h-full  custom-table">
           <TableHeader row={Object.keys(filterValue[0])} specialClasses="" />
-          {/* {filterValue.map((v, c) => (
+          {JSON.stringify(filterValue)}
+          {/* {filterValue.map((v, c) => {
             //@ts-ignore
-            <TableRow divNumber={c} row={v} key={c} specialClasses="" />
-          ))} */}
+            // return <div className="table-row">{JSON.stringify(v, c)}</div>;
+            // return <TableRow divNumber={c} row={v} key={c} specialClasses="" />;
+          })} */}
         </div>
       </div>
     );

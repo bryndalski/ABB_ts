@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useDebugValue } from "react";
+import React, { useState, useEffect } from "react";
 import "./headerCellStyle.css"; //styles
 export default function HeaderCell(props: {
   value: string;
@@ -8,7 +8,6 @@ export default function HeaderCell(props: {
   const [resizeEnable, setResizeEnable] = useState<boolean>(true);
   const [cellSize, setCellSize] = useState(props.width || 200);
 
-  useDebugValue(console.log(cellSize));
   useEffect(() => {
     const onUpListener = (e: MouseEvent) => {
       setResizeEnable(false);
@@ -29,9 +28,9 @@ export default function HeaderCell(props: {
       style={{
         width: `${cellSize}px`,
       }}
-      className="table-cell bg-red-500 h-8 max-h-8">
+      className="table-cell  h-8 max-h-8">
       {/* <div className="flex-row justify-center "> */}
-      <p className="cellName bg-green-500">{props.value}</p>
+      <p className="cellName ">{props.value}</p>
       {/* <div className="catchBoard "></div> */}
       {/* </div> */}
     </div>

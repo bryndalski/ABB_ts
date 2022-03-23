@@ -19,6 +19,9 @@ interface propsInterface {
 export default function TableRow(props: propsInterface) {
   const [rowValues, setRowValues] = useState({ ...props.row });
   const [olderValue, setOlderValue] = useState({ ...props.row });
+  console.log("====================================");
+  console.log(props.row);
+  console.log("====================================");
   return (
     <div
       className="table-row  text-justify"

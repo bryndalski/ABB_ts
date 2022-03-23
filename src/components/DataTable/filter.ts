@@ -11,9 +11,8 @@ const filter = (
   data = data.filter((e) =>
     Object.values(e).join('').includes(value) ? e : null,
   )
-  console.log(data)
 
-  return [...data]
+  return data
 }
 
 export default filter

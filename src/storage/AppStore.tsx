@@ -39,7 +39,6 @@ class AppStore {
   setFilterOption(
     options: { name: string; value: string | boolean | string[] }[]
   ) {
-    console.table(options);
     options.forEach((e) => (this.filter[e.name] = e.value));
   }
 }
