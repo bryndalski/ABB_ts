@@ -1,5 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import FilterInterface from "./interfaces/FilterInterface";
+import getData from "./getData";
+import CONFIG from "../CONFIG.json";
 //helpers
 
 class AppStore {
@@ -10,6 +12,7 @@ class AppStore {
     sidebarVisible: false,
     value: "",
   };
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -22,6 +25,10 @@ class AppStore {
   setCurrentSheet(newSheet: string) {
     this.sheet = newSheet;
   }
+  fetchData = () =>
+    new Promise(async (suc) =>
+      suc(await getData(CONFIG.sheetsData, this.sheet))
+    );
 
   /**
    * Extract column headers from example row

@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import TableCell from "../singleTableCell/TableCell";
 
 import SendRowData from "./SendRowData";
 
 //icons
-
-import { FiTrash } from "react-icons/fi";
 import appStore from "../../storage/AppStore";
 
 interface propsInterface {
@@ -19,33 +17,35 @@ interface propsInterface {
 export default function TableRow(props: propsInterface) {
   const [rowValues, setRowValues] = useState({ ...props.row });
   const [olderValue, setOlderValue] = useState({ ...props.row });
-  console.log("====================================");
-  console.log(props.row);
-  console.log("====================================");
+
+  const rednerCells = useCallback(() => {
+    return Object.keys(props.row).map((e, c) => {
+      if (Object.keys(props.row)[0] === "id" && c === 0) {
+      } else
+        return (
+          <TableCell
+            key={c}
+            //@ts-ignore
+            value={props.row[e]}
+            editable={c !== 0 && Object.keys(props.row)[0] === "id"}
+            editValue={setRowValues}
+            colName={e}
+          />
+        );
+    });
+  }, [JSON.stringify(props.row)]);
+
   return (
     <div
       className="table-row  text-justify"
       onBlur={() => {
-        // SendRowData();
+        // sensd row data
         if (JSON.stringify(rowValues) !== JSON.stringify(olderValue)) {
           SendRowData(props.row.id, appStore.sheet, rowValues);
           setOlderValue({ ...rowValues });
         }
       }}>
-      {Object.keys(props.row).map((e, c) => {
-        if (Object.keys(props.row)[0] === "id" && c === 0) {
-        } else
-          return (
-            <TableCell
-              key={c}
-              //@ts-ignore
-              value={props.row[e]}
-              editable={c !== 0 && Object.keys(props.row)[0] === "id"}
-              editValue={setRowValues}
-              colName={e}
-            />
-          );
-      })}
+      {rednerCells()}
     </div>
   );
 }

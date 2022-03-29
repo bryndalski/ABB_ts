@@ -8,7 +8,7 @@ import React, {
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
 //functions
-import getData from "./getData";
+import getData from "../../storage/getData";
 //config
 import CONFIG from "../../CONFIG.json";
 //style
@@ -77,12 +77,10 @@ function DataTableComponent() {
       <div className="w-full overflow-auto  tableContainer">
         <div className="table  w-full tableColor max-h-full  custom-table">
           <TableHeader row={Object.keys(filterValue[0])} specialClasses="" />
-          {JSON.stringify(filterValue)}
-          {/* {filterValue.map((v, c) => {
+          {filterValue.map((v, c) => {
             //@ts-ignore
-            // return <div className="table-row">{JSON.stringify(v, c)}</div>;
-            // return <TableRow divNumber={c} row={v} key={c} specialClasses="" />;
-          })} */}
+            return <TableRow divNumber={c} row={v} key={c} specialClasses="" />;
+          })}
         </div>
       </div>
     );

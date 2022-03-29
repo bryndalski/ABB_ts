@@ -4,8 +4,8 @@
 }
 
 .tableContainer {
-  height: 100%;
-  /* height: calc(100vh - 100px) !important; */
+  /* height: 100%; */
+  height: calc(100vh - 4.2rem) !important;
 }
 
 .custom-table {

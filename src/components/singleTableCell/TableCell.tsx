@@ -10,12 +10,12 @@ interface propsInterface {
 
 export default function TableCell(props: propsInterface) {
   const [cellValue, setCellValue] = useState(props.value);
-
   return (
     <div className="table-cell text-center cell-container">
       <textarea
         // disabled={props.editable}
         onBlur={(e) => {
+          // uodate row value on exit of cell
           props.editValue((v: any) => {
             v[props.colName] = cellValue;
             return v;
@@ -24,6 +24,7 @@ export default function TableCell(props: propsInterface) {
         className="  border-solid border-2 resize-none  overflow-ellipsis  cell focus:outline-none focus:border-blue-500"
         value={cellValue}
         onChange={(e) => {
+          //update cell courent value
           setCellValue(e.target.value as string);
         }}
       />
