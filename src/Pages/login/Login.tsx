@@ -1,9 +1,10 @@
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useReducer, useState, useEffect, useDebugValue } from "react";
 import LogInReducerInterface from "./LogInInterface"; // css
 import CONFIG from "../../CONFIG.json";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import "./loginStyles.css";
+import appStore from "../../storage/AppStore";
 interface props {}
 const loginState: LogInReducerInterface = {
   username: "",
@@ -54,6 +55,9 @@ export default function Login(props: props) {
     const listener = (event: any) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         event.preventDefault();
+        console.log("====================================");
+        console.log(login, !login.username || !login.password);
+        console.log("====================================");
         if (!login.username || !login.password) loginUser();
       }
     };
@@ -66,6 +70,8 @@ export default function Login(props: props) {
 
   //login user
   const loginUser = async () => {
+    console.log(login);
+
     axios({
       method: "post",
       headers: {
@@ -75,12 +81,13 @@ export default function Login(props: props) {
       data: {
         ...login,
       },
-      url: "https://abbdb.herokuapp.com/login",
+      url: CONFIG.loginAddress,
     }).then((res) => {
       console.log(res);
       if (res.status === 200 && res.data.success) {
-        console.log("jazda");
-        window.location.href = "/home";
+        console.log(res.data);
+        appStore.setUser({ ...res.data.user, login: true });
+        // window.location.href = "/home";
       } else {
         setError(true);
         return;

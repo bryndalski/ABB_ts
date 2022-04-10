@@ -1,16 +1,27 @@
 import { makeAutoObservable } from "mobx";
-import FilterInterface from "./interfaces/FilterInterface";
+import FilterInterface from "../components/FilterInput/FilterInterface";
 import getData from "./getData";
 import CONFIG from "../CONFIG.json";
+import TableDataInterface from "./interfaces/TableDataInterface";
+import LoginInterface from "./interfaces/LoginInterface";
 //helpers
 
 class AppStore {
-  sheet: string = ""; // contains courrent selected sheet
-  columnNames: string[] = []; // contains list of all columns in courrent sheet
   filter: FilterInterface = {
     invisibleColums: [],
     sidebarVisible: false,
     value: "",
+  };
+  data: TableDataInterface = {
+    data: [],
+    sheet: "", // contains courrent selected sheet
+    columnNames: [], // contains list of all columns in courrent sheet
+  };
+  login: LoginInterface = {
+    username: "",
+    logged: false,
+    email: "",
+    permissions: "",
   };
 
   constructor() {
@@ -23,11 +34,11 @@ class AppStore {
    * @param newSheet name of new sheet
    */
   setCurrentSheet(newSheet: string) {
-    this.sheet = newSheet;
+    this.data.sheet = newSheet;
   }
   fetchData = () =>
     new Promise(async (suc) =>
-      suc(await getData(CONFIG.sheetsData, this.sheet))
+      suc(await getData(CONFIG.sheetsData, this.data.sheet))
     );
 
   /**
@@ -37,7 +48,7 @@ class AppStore {
    *
    */
   setColumnNames(exampleRow: Object) {
-    this.columnNames = Object.keys(exampleRow);
+    this.data.columnNames = Object.keys(exampleRow);
   }
   /**
    * Changes opotion of filter
@@ -47,6 +58,13 @@ class AppStore {
     options: { name: string; value: string | boolean | string[] }[]
   ) {
     options.forEach((e) => (this.filter[e.name] = e.value));
+  }
+  /**
+   *Sets login with user
+   * @param user:
+   */
+  setUser(user: LoginInterface) {
+    this.login = { ...user };
   }
 }
 

@@ -1,23 +1,36 @@
-import React, { createContext, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { UserContext } from "./context/UserContext";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Login from "./Pages/login/Login";
 import Home from "./Pages/home/Home";
-const UserContextValue = {
-  user: "",
-  isLogged: false,
-  permissions: "",
-};
+import ProtectedRoute from "./Routes/ProtectedRoute";
+import appStore from "./storage/AppStore";
+import { observer } from "mobx-react";
 
-export default function App() {
+function AppComponent() {
   return (
     <Router>
-      <UserContext.Provider value={UserContextValue}>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </UserContext.Provider>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute
+              condition={appStore.login.logged}
+              renderTrue={<Home />}
+              renderFalse={<Navigate to="/login" replace />}
+            />
+          }
+        />
+        <Route path="*" element={<>NIe ma </>} />
+      </Routes>
     </Router>
   );
 }
+
+const App = observer(AppComponent);
+export default App;

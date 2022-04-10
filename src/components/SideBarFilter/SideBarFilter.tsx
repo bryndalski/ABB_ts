@@ -37,11 +37,13 @@ function SideBarFilterComponent() {
       </section>
       <section className="p-2">
         <span>Szukaj w kolumnach:</span>
+        {/*  mult select of column names */}
+
         <MultiCheckboxList
           label="Ukryte kolumny"
           multi={true}
           showSelected={true}
-          data={appStore.columnNames}
+          data={appStore.data.columnNames}
           onChange={(value: { checked: boolean; label: string }[]) => {
             let filterValues: string[] = value // creates string array of all  unwanted columns
               .filter((e) => e.checked)

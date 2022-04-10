@@ -41,10 +41,11 @@ export default function TableRow(props: propsInterface) {
       onBlur={() => {
         // sensd row data
         if (JSON.stringify(rowValues) !== JSON.stringify(olderValue)) {
-          SendRowData(props.row.id, appStore.sheet, rowValues);
+          SendRowData(props.row.id, appStore.data.sheet, rowValues);
           setOlderValue({ ...rowValues });
         }
       }}>
+      {/* render cells of row */}
       {rednerCells()}
     </div>
   );

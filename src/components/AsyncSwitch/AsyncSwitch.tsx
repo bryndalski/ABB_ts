@@ -60,7 +60,7 @@ function AsyncSwitchComponent() {
       //data fetched and rendered
       <div>
         <select
-          value={appStore.sheet}
+          value={appStore.data.sheet}
           onChange={(e) => {
             appStore.setCurrentSheet(e.target.value);
           }}

@@ -45,7 +45,7 @@ function DataTableComponent() {
     setIsLoading(true); // start loading signature
     appStore.setColumnNames({});
     appStore.setFilterOption([{ name: "invisibleColums", value: [] }]); /// clears all options in filter
-    let fetchedSheets = await getData(CONFIG.sheetsData, appStore.sheet); // get new sheet content
+    let fetchedSheets = await getData(CONFIG.sheetsData, appStore.data.sheet); // get new sheet content
     setSheetData(fetchedSheets); // set new sheet data
     appStore.setColumnNames(fetchedSheets[0]); // set column names
     setIsLoading((prev) => !prev); // stops loadin
@@ -53,8 +53,8 @@ function DataTableComponent() {
   //watch for sheet change to trigger refresing table data
   //TODO add force reset
   useEffect(() => {
-    if (appStore.sheet != "") controllAsync();
-  }, [appStore.sheet]);
+    if (appStore.data.sheet != "") controllAsync();
+  }, [appStore.data.sheet]);
 
   useDebugValue(console.log(filterValue));
 
