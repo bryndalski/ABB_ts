@@ -20,7 +20,7 @@ function AppComponent() {
           path="/home"
           element={
             <ProtectedRoute
-              condition={appStore.login.logged}
+              condition={true}
               renderTrue={<Home />}
               renderFalse={<Navigate to="/login" replace />}
             />

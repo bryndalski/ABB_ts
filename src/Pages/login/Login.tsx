@@ -2,7 +2,7 @@ import React, { useReducer, useState, useEffect, useDebugValue } from "react";
 import LogInReducerInterface from "./LogInInterface"; // css
 import CONFIG from "../../CONFIG.json";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./loginStyles.css";
 import appStore from "../../storage/AppStore";
 interface props {}
@@ -45,7 +45,7 @@ function loginReducer(
 export default function Login(props: props) {
   const [login, dispatch] = useReducer(loginReducer, loginState);
   const [error, setError] = useState(false);
-
+  const navigate = useNavigate();
   //Watch for retyping password
   useEffect(() => {
     setError(false);
@@ -87,6 +87,8 @@ export default function Login(props: props) {
       if (res.status === 200 && res.data.success) {
         console.log(res.data);
         appStore.setUser({ ...res.data.user, login: true });
+        navigate("/home");
+
         // window.location.href = "/home";
       } else {
         setError(true);

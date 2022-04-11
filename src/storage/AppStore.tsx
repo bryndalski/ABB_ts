@@ -1,9 +1,11 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, observable } from "mobx";
+import { persist } from "mobx-persist";
 import FilterInterface from "../components/FilterInput/FilterInterface";
 import getData from "./getData";
 import CONFIG from "../CONFIG.json";
 import TableDataInterface from "./interfaces/TableDataInterface";
 import LoginInterface from "./interfaces/LoginInterface";
+
 //helpers
 
 class AppStore {
@@ -17,7 +19,8 @@ class AppStore {
     sheet: "", // contains courrent selected sheet
     columnNames: [], // contains list of all columns in courrent sheet
   };
-  login: LoginInterface = {
+  //@ts-ignore
+  @persist("object") login: LoginInterface = {
     username: "",
     logged: false,
     email: "",
