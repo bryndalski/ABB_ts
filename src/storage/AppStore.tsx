@@ -19,7 +19,7 @@ class AppStore {
     sheet: "", // contains courrent selected sheet
     columnNames: [], // contains list of all columns in courrent sheet
   };
-  //@ts-ignore
+  //@ts-ignore0
   @persist("object") login: LoginInterface = {
     username: "",
     logged: false,

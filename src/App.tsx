@@ -17,7 +17,7 @@ function AppComponent() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
-          path="/home"
+          path="/"
           element={
             <ProtectedRoute
               condition={true}
