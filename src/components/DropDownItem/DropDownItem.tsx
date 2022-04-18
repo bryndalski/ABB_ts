@@ -8,6 +8,7 @@ interface DropDownInterface {
   rightIcon?: React.ReactElement;
   children?: any;
   textStyles?: string;
+  onCLick?: Function;
 }
 
 export default function DropDownItem(props: DropDownInterface) {
@@ -15,10 +16,12 @@ export default function DropDownItem(props: DropDownInterface) {
     <a
       href="#"
       className="menu-item w-64 hover:bg-blue-100"
-      onClick={() => props.goToMenu && props.setActiveMenu(props.goToMenu)}>
+      onClick={() => {
+        if (props.onCLick) props.onCLick();
+        return props.goToMenu && props.setActiveMenu(props.goToMenu);
+      }}>
       <span className="icon-button">{props.leftIcon}</span>
       <span className={`${props.textStyles}`}>{props.children}</span>
-
       <span className="icon-right">{props.rightIcon}</span>
     </a>
   );

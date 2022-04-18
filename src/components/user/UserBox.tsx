@@ -1,14 +1,22 @@
 import React, { useState, useDebugValue } from "react";
-import { observer } from "mobx-react";
+import { useNavigate } from "react-router-dom";
+//custom
+import DropDownMenuContainer from "../DropDownMenuContainer/DropDownMenuContainer";
+import DropdownItem from "../DropDownItem/DropDownItem";
+//css
+import { CSSTransition } from "react-transition-group";
+//icons
+import { BiLogOutCircle } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { MdSettings, MdAdminPanelSettings } from "react-icons/md";
-import DropDownMenuContainer from "../DropDownMenuContainer/DropDownMenuContainer";
-import { CSSTransition } from "react-transition-group";
-import DropdownItem from "../DropDownItem/DropDownItem";
+//storage
+import { observer } from "mobx-react";
 import appStore from "../../storage/AppStore";
+
 function UserBoxComponent() {
   const [open, setOpen] = useState(true);
   const [menuHeight, setMenuHeight] = useState(null);
+  const navigate = useNavigate();
 
   const [activeMenu, setActiveMenu] = useState("main");
 
@@ -48,11 +56,17 @@ function UserBoxComponent() {
                 leftIcon={
                   <MdAdminPanelSettings className="text-2xl text-blue-700" />
                 }
-                setActiveMenu={setActiveMenu}>
+                setActiveMenu={setActiveMenu}
+                textStyles="capitalize">
                 {appStore.login.permissions}
               </DropdownItem>
               <DropdownItem
+                leftIcon={<BiLogOutCircle className="text-2xl text-red-600" />}
                 setActiveMenu={setActiveMenu}
+                onCLick={() => {
+                  appStore.logOut();
+                  navigate("/loggedOut");
+                }}
                 textStyles="text-red-600 text-center  self-center margin-center">
                 WYLOGUJ SIĘ
               </DropdownItem>

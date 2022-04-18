@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useDebugValue } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,15 +12,25 @@ import appStore from "./storage/AppStore";
 import { observer } from "mobx-react";
 
 function AppComponent() {
+  useDebugValue(console.log(appStore.login));
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <ProtectedRoute
+              condition={!appStore.login.logged}
+              renderTrue={<Login />}
+              renderFalse={<Navigate to="/" replace />}
+            />
+          }
+        />
         <Route
           path="/"
           element={
             <ProtectedRoute
-              condition={true}
+              condition={appStore.login.logged}
               renderTrue={<Home />}
               renderFalse={<Navigate to="/login" replace />}
             />

@@ -1,10 +1,11 @@
-import { makeAutoObservable, observable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { persist } from "mobx-persist";
 import FilterInterface from "../components/FilterInput/FilterInterface";
 import getData from "./getData";
 import CONFIG from "../CONFIG.json";
 import TableDataInterface from "./interfaces/TableDataInterface";
 import LoginInterface from "./interfaces/LoginInterface";
+import { makePersistable, hydrateStore } from "mobx-persist-store";
 
 //helpers
 
@@ -19,8 +20,7 @@ class AppStore {
     sheet: "", // contains courrent selected sheet
     columnNames: [], // contains list of all columns in courrent sheet
   };
-  //@ts-ignore0
-  @persist("object") login: LoginInterface = {
+  login: LoginInterface = {
     username: "",
     logged: false,
     email: "",
@@ -29,6 +29,11 @@ class AppStore {
 
   constructor() {
     makeAutoObservable(this);
+    makePersistable(this, {
+      storage: sessionStorage,
+      name: "Local",
+      properties: ["login"],
+    });
   }
 
   /**
@@ -67,7 +72,18 @@ class AppStore {
    * @param user:
    */
   setUser(user: LoginInterface) {
-    this.login = { ...user };
+    runInAction(() => (this.login = { ...user }));
+  }
+  logOut() {
+    runInAction(
+      () =>
+        (this.login = {
+          logged: false,
+          email: "",
+          permissions: "",
+          username: "",
+        } as LoginInterface)
+    );
   }
 }
 
