@@ -81,7 +81,7 @@ class AppStore {
           logged: false,
           email: "",
           permissions: "",
-          username: "",
+          username: this.login.username,
         } as LoginInterface)
     );
   }
