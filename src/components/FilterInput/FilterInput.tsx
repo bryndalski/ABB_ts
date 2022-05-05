@@ -8,7 +8,7 @@ import appStore from "../../storage/AppStore";
 import { FiFilter } from "react-icons/fi";
 function FilterInputComponent() {
   return (
-    <div className="sm:min-w-[127px]  max-w-fit bg-white rounded-md flex flex-row align-baseline ml-2">
+    <div className="sm:min-w-[127px] hidden sm:flex bg-white rounded-md  flex-row align-baseline ml-2">
       <FiFilter
         onClick={() => {
           appStore.setFilterOption([

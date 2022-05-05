@@ -1,3 +1,7 @@
+/**
+ * Log out and setting menu
+ */
+
 import React, { useState, useDebugValue } from "react";
 import { useNavigate } from "react-router-dom";
 //custom
@@ -14,13 +18,16 @@ import { observer } from "mobx-react";
 import appStore from "../../storage/AppStore";
 
 function UserBoxComponent() {
-  const [open, setOpen] = useState(true);
-  const [menuHeight, setMenuHeight] = useState(null);
+  const [open, setOpen] = useState<boolean>(false); // menu is visible ?
+  const [menuHeight, setMenuHeight] = useState<Number | null>(null); // menu height
   const navigate = useNavigate();
 
-  const [activeMenu, setActiveMenu] = useState("main");
+  const [activeMenu, setActiveMenu] = useState<string>("main"); // which item is active
 
-  useDebugValue(console.log(open));
+  /**
+   * Calculates destinantion height
+   * @param el
+   */
   function calcHeight(el: any) {
     const height = el.offsetHeight;
     setMenuHeight(height);
@@ -32,7 +39,7 @@ function UserBoxComponent() {
         className="text-2xl text-white"
         onClick={() => setOpen((v) => !v)}
       />
-
+      {/* Opened menu */}
       {open ? (
         <DropDownMenuContainer styles="rounded-xl bg-white border-solid border-2 border-blue-700 h-auto">
           <CSSTransition
@@ -52,14 +59,17 @@ function UserBoxComponent() {
                 setActiveMenu={setActiveMenu}>
                 Ustawienia
               </DropdownItem>
-              <DropdownItem
+              {
+                //? Czy dodawać admina
+                /* <DropdownItem
                 leftIcon={
                   <MdAdminPanelSettings className="text-2xl text-blue-700" />
                 }
                 setActiveMenu={setActiveMenu}
                 textStyles="capitalize">
                 {appStore.login.permissions}
-              </DropdownItem>
+              </DropdownItem> */
+              }
               <DropdownItem
                 leftIcon={<BiLogOutCircle className="text-2xl text-red-600" />}
                 setActiveMenu={setActiveMenu}

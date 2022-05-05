@@ -7,10 +7,10 @@ import SideBarInterface from "./SideBarInterface";
 // ${!props.isVisible ? "hidden" : ""} // !!!?
 export default function SideBarContainer(props: SideBarInterface) {
   return (
-    <div className="sidebar">
+    <div className="sidebar in">
       <div className="p-3">
         <AiOutlineClose
-          className="block ml-auto cursor-pointer text-xl"
+          className="block ml-auto cursor-pointer text-xl "
           onClick={() => props.changeVisible(false)}
         />
       </div>

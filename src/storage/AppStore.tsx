@@ -74,6 +74,9 @@ class AppStore {
   setUser(user: LoginInterface) {
     runInAction(() => (this.login = { ...user }));
   }
+  /**
+   * Log uut resets setting to default
+   */
   logOut() {
     runInAction(
       () =>

@@ -1,3 +1,7 @@
+/**
+ * Single item for css navigation
+ *
+ */
 import React from "react";
 import "./NavItemStyles.css";
 export default function NavItem(props: any) {

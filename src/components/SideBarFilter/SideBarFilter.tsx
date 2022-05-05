@@ -1,3 +1,7 @@
+/**
+ * Side bar data foilter with columns
+ */
+
 import React from "react";
 import { observer } from "mobx-react";
 import SideBarContainer from "../sidebarWrapper/SideBarContainer";

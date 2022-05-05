@@ -1,13 +1,17 @@
+/**
+ * Covers single user option
+ */
 import React from "react";
 
 //Styles
 
 import "./UserSideBarOptionStyles.css";
+import UserSideBarOptionInterface from "./UserSideBarOptionInterface";
 
-export default function UserSideBarOption() {
+export default function UserSideBarOption(props: UserSideBarOptionInterface) {
   return (
-    <div className="p-2 border-t-blue-500 mt-1 border-solid border-t-2 w-1/3">
-      <span>OPCJA UŻYTKOWNIKA</span>
+    <div className="m-0 border-b-blue-500 p-2 border-solid border-b-2 w-full hover:bg-blue-300 xs:w-1/3 text-center hover:cursor-pointer">
+      <span>{props.text}</span>
     </div>
   );
 }

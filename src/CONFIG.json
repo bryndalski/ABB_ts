@@ -2,5 +2,13 @@
   "loginAddress": "https://abbdb.herokuapp.com/login",
   "allSheetsNames": "https://abbdb.herokuapp.com/sheets",
   "sheetsData": "https://abbdb.herokuapp.com/fetchColumn",
-  "editRow": "https://abbdb.herokuapp.com/editRow"
+  "editRow": "https://abbdb.herokuapp.com/editRow",
+  "users": {
+    "defualt": [
+      { "text": "zmień hasło", "target": "password" },
+      { "text": "zmień login", "target": "login" },
+      { "text": "zmień email", "target": "mail" }
+    ],
+    "admin": [{ "text": "dodaj użytkownika", "target": "new user" }]
+  }
 }

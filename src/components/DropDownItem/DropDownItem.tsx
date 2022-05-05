@@ -1,3 +1,7 @@
+/**
+ * Dropdown item used in DropdownMenuContainer
+ */
+
 import React from "react";
 import "./ManuItemStyles.css";
 

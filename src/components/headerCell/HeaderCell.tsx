@@ -1,3 +1,7 @@
+/**
+ * Data table single header cell
+ */
+
 import React, { useState, useEffect } from "react";
 import "./headerCellStyle.css"; //styles
 export default function HeaderCell(props: {
