@@ -14,7 +14,7 @@ function HomeComponent() {
         <Header></Header>
         <DataTable></DataTable>
       </div>
-      {appStore.filter.sidebarVisible ? <SideBarFilter /> : null}
+      <SideBarFilter />
     </>
   );
 }

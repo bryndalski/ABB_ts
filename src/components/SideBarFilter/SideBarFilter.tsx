@@ -17,7 +17,8 @@ function SideBarFilterComponent() {
     <SideBarContainer
       changeVisible={() =>
         appStore.setFilterOption([{ name: "sidebarVisible", value: false }])
-      }>
+      }
+      isVisible={appStore.filter.sidebarVisible}>
       <span className="block text-center">Opcje Filtra</span>
       <section className="p-2">
         <span>Aktualny filter</span>

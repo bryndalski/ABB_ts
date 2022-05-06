@@ -6,13 +6,12 @@
   right: 0;
   top: 4.2rem;
   background-color: white;
-  transition: all 2s ease-in-out;
 }
 
 .in {
-  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+  -webkit-animation: slide-in-right 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     both;
-  animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-right 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .out {
