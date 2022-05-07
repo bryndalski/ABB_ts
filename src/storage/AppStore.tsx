@@ -6,6 +6,7 @@ import CONFIG from "../CONFIG.json";
 import TableDataInterface from "./interfaces/TableDataInterface";
 import LoginInterface from "./interfaces/LoginInterface";
 import { makePersistable, hydrateStore } from "mobx-persist-store";
+import SheetMenagerInterface from "./interfaces/SheetMenager";
 
 //helpers
 
@@ -25,6 +26,9 @@ class AppStore {
     logged: false,
     email: "",
     permissions: "",
+  };
+  sheetMenager: SheetMenagerInterface = {
+    visible: true,
   };
 
   constructor() {

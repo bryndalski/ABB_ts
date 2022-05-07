@@ -13,7 +13,7 @@ export default function SideBarContainer(props: SideBarInterface) {
 
   return (
     <div
-      className={`sidebar ${
+      className={`sidebar xs:w-80 w-full ${
         isFirstRender ? (props.isVisible ? "in" : "out") : "hidden"
       }`}>
       <div className="p-3">

@@ -6,6 +6,7 @@ import SideBarFilter from "../../components/SideBarFilter/SideBarFilter";
 import appStore from "../../storage/AppStore";
 //mobix
 import { observer } from "mobx-react";
+import SideBarSheetMenager from "../../components/SIdeBarSheetMenager/SideBarSheetMenager";
 
 function HomeComponent() {
   return (
@@ -15,6 +16,7 @@ function HomeComponent() {
         <DataTable></DataTable>
       </div>
       <SideBarFilter />
+      <SideBarSheetMenager />
     </>
   );
 }
