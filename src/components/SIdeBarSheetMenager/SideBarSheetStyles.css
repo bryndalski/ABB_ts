@@ -1,0 +1,25 @@
+.downloadButton {
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 0.5rem;
+  @apply border-blue-500 p-2 border-solid  border-2 rounded-md;
+  position: relative;
+}
+.downloadButton::before {
+  @apply bg-blue-500;
+  position: absolute;
+  transition: 1s all ease-in-out;
+  width: 0%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  content: "";
+  margin-right: auto;
+}
+
+.downloadButton:hover::before {
+  width: 100%;
+  transition: 1s all ease-in-out;
+}

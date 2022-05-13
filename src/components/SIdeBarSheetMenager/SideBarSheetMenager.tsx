@@ -9,6 +9,11 @@ import React from "react";
 import { observer } from "mobx-react";
 import SideBarContainer from "../sidebarWrapper/SideBarContainer";
 import FileInput from "../FileInput/FileInput";
+import "./SideBarSheetStyles.css"; //css
+//functions
+import DownloadSheet from "./DonwloadSheet";
+//icons
+import { MdDownload } from "react-icons/md";
 
 function SideBarSheetMenagerComponent() {
   return (
@@ -20,6 +25,13 @@ function SideBarSheetMenagerComponent() {
       <div>
         <FileInput />
       </div>
+      <hr className=" m-2 border-blue-900" />
+      <span className="text-center text block">
+        Pobierz wersję <b>XLS</b>
+      </span>
+      <button onClick={DownloadSheet} className="  downloadButton">
+        Pobierz
+      </button>
     </SideBarContainer>
   );
 }

@@ -3,6 +3,7 @@
   "allSheetsNames": "https://abbdb.herokuapp.com/sheets",
   "sheetsData": "https://abbdb.herokuapp.com/fetchColumn",
   "editRow": "https://abbdb.herokuapp.com/editRow",
+  "downloadSheet": "https://abbdb.herokuapp.com/fileExport",
   "users": {
     "defualt": [
       { "text": "zmień hasło", "target": "password" },
