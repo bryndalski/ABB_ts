@@ -1,0 +1,26 @@
+.text_name_input {
+  @apply border-b-2  border-solid border-blue-700;
+  width: 90%;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+.text_name_input::before {
+  content: "Nazwa arkusza";
+  @apply h-12 text-xl;
+  line-height: 3rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.text_name_input input[type="text"] {
+  @apply h-12 text-2xl;
+  line-height: 3rem;
+  vertical-align: bottom;
+  z-index: 2; /* height: 130%; */ /* width: 100%; */
+}
+.text_name_input input[type="text"]:focus + .text_name_input::before {
+  background-color: blue;
+}

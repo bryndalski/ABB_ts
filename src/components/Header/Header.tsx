@@ -17,23 +17,24 @@ function HeaderComponent() {
       <AsyncSwitch></AsyncSwitch>
       <FilterInput></FilterInput>
       <div className="flex flex-row ml-auto">
-        <NavItem>
+        <NavItem click={appStore.openCloseSidebar}>
           {/* className="inline-block text-white self-center mr-2 h-full text-4xl" */}
           <BsFileEarmarkSpreadsheet className="text-2xl text-white" />
         </NavItem>
-        <NavItem>
-          <FiFilter
-            onClick={() => {
-              appStore.setFilterOption([
-                {
-                  name: "sidebarVisible",
-                  value: !appStore.filter.sidebarVisible,
-                },
-              ]);
-            }}
-            className="text-2xl text-white"></FiFilter>
+        <NavItem
+          click={() => {
+            console.log("KLIK");
+
+            appStore.setFilterOption([
+              {
+                name: "sidebarVisible",
+                value: !appStore.filter.sidebarVisible,
+              },
+            ]);
+          }}>
+          <FiFilter className="text-2xl text-white"></FiFilter>
         </NavItem>
-        <NavItem>
+        <NavItem click={() => {}}>
           <UserBox />
         </NavItem>
       </div>
