@@ -10,7 +10,7 @@
     both;
   animation: slide-out-left 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
-//adios
+/* //adios */
 @-webkit-keyframes slide-out-left {
   0% {
     -webkit-transform: translateX(0);
@@ -35,7 +35,7 @@
     opacity: 0;
   }
 }
-//hello there
+/* //hello there */
 @-webkit-keyframes slide-in-left {
   0% {
     -webkit-transform: translateX(-1000px);

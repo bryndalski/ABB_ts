@@ -52,7 +52,8 @@ function UserBoxComponent() {
               <DropdownItem
                 leftIcon={<FaUserCircle className="text-2xl text-blue-700" />}
                 setActiveMenu={setActiveMenu}
-                onCLick={() => navigate("/user")}>
+                // onCLick={() => navigate("/")}>
+                onCLick={() => {}}>
                 Mój Profil
               </DropdownItem>
               <DropdownItem

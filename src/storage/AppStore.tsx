@@ -28,7 +28,7 @@ class AppStore {
     permissions: "",
   };
   sheetMenager: SheetMenagerInterface = {
-    visible: true,
+    visible: false,
   };
 
   constructor() {
@@ -92,6 +92,12 @@ class AppStore {
         } as LoginInterface)
     );
   }
+  /**
+   * Change visibility of sidebar
+   * @returns
+   */
+  openCloseSidebar = () =>
+    (this.sheetMenager.visible = !this.sheetMenager.visible);
 }
 
 const appStore = new AppStore();
