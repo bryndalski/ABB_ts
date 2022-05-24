@@ -8,6 +8,10 @@
   max-height: fit-content;
   max-height: 30px;
   height: 30px;
+  overflow: scroll;
+}
+.cellName::-webkit-scrollbar {
+  display: none;
 }
 
 .catchBoard:hover {

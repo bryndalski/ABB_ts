@@ -12,6 +12,7 @@ import CONFIG from "../../CONFIG.json";
 import { observer } from "mobx-react";
 import appStore from "../../storage/AppStore";
 import { useState } from "react";
+import { useDebugValue } from "react";
 
 function OptionBarComponent(props: OptionBarInterface) {
   const [windowWidth, setWindowWidth] = useState<number>(0);
@@ -24,10 +25,10 @@ function OptionBarComponent(props: OptionBarInterface) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
+  useDebugValue(console.log(props.isOpen));
   return (
     <div
-      className={`${
+      className={`w-full sm:w-[300px] absolute  ${
         windowWidth < 500
           ? props.isOpen
             ? "optionBarActive"

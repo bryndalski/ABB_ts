@@ -37,9 +37,9 @@ function SideBarSheetMenagerComponent() {
       <button onClick={DownloadSheet} className="  downloadButton">
         Pobierz
       </button>
-      <hr className=" m-2 border-blue-900" />
+      {/* <hr className=" m-2 border-blue-900" />
       <span className="text-center text block">Stwórz nowy arkusz</span>
-      <AddNewSheet />
+      <AddNewSheet /> */}
     </SideBarContainer>
   );
 }

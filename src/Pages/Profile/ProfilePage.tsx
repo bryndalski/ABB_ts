@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ChangeData from "../../components/ChangeData/ChangeData";
 import Header from "../../components/Header/Header";
 import OptionBar from "../../components/OptionBar/OptionBar";
 import UserHeader from "../../components/UserHeader/UserHeader";
@@ -10,8 +11,11 @@ export default function ProfilePage() {
   return (
     <div className="w-full h-full">
       <UserHeader setDropdown={() => setOpen((v) => !v)} />
-      <div className="h-full">
-        <OptionBar isOpen={isOpen} />
+      <div className="xs:flex xd:flex-row ">
+        <div className="h-full">
+          <OptionBar isOpen={isOpen} />
+        </div>
+        <ChangeData />
       </div>
     </div>
   );
